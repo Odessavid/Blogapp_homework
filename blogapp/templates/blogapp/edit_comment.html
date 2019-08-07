@@ -1,0 +1,20 @@
+{% extends 'blogapp/base_index.html' %}
+{% block content %}
+
+<form  action="{% url 'edit' comment.id %}" method="post">
+    {% csrf_token %}
+    <ul>
+        <li>
+            <h2>Редоктирование коментария</h2>
+        </li>
+        <li>
+            <label>Текст коментария:</label>
+            <textarea name="text" cols="40" rows="5">{{comment.text}}</textarea>
+        </li>
+        <li>
+            <button type="submit">Сохранить</button>
+        </li>
+    </ul>
+</form>
+
+{% endblock %}

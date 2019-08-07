@@ -1,0 +1,45 @@
+{% extends 'blogapp/base_index.html' %}
+{% block content %}
+
+<ul>
+    <li>
+        <b>{{cur_user.username}}</b> &nbsp&nbsp&nbsp&nbsp <i>Зарегистрирован {{cur_user.profile.date_time }}</i>
+    </li>
+    <li>
+        <b>Имя:</b>
+        {{ cur_user.get_full_name }}
+    </li>
+    <li>
+        <b>Email:</b>
+        {{cur_user.email}}
+    </li>
+    <li>
+        <b>Дата рождения:</b>
+        {{cur_user.profile.b_day }}
+    </li>
+    <li>
+        <b>Skype:</b>
+        {{cur_user.profile.skype }}<br>
+    </li>
+    <li>
+        <b>Facebook:</b>
+        {{cur_user.profile.facebook}}<br>
+    </li>
+    <li>
+        <b>About:</b>
+        {{cur_user.profile.about}}<br>
+    </li>
+    <li>
+
+    </li>
+</ul>
+
+{% if user.is_authenticated %}
+    {% if cur_user == user %}
+        <a href="{% url 'edit_profile' %}">Редактировать профиль</a>
+    {% else %}
+        <a href="{% url 'message' cur_user.id %}">Отправить личное сообщение</a>
+    {% endif %}
+{% endif %}
+
+{% endblock %}

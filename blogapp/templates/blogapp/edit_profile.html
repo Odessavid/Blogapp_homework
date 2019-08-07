@@ -1,0 +1,26 @@
+{% extends 'blogapp/base_index.html' %}
+{% block content %}
+
+<form  action="{% url 'edit_profile' %}" method="post">
+    {% csrf_token %}
+    <ul>
+        <li>
+            <h2>{{user}}</h2>
+        </li>
+        <li>
+            <a href="{% url 'change-password' %}">change-password</a><br><br>
+        </li>
+        <li>
+            <label for="id_email">Email address:</label>
+            <input type="email" name="email" value={{ user.email}} maxlength="254" id="id_email">
+        </li>
+        <li>
+            {{ profileform.as_p }}
+        </li>
+        <li>
+            <button type="submit">Сохранить</button>
+        </li>
+    </ul>
+</form>
+
+{% endblock %}

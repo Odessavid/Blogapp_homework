@@ -1,0 +1,32 @@
+{% extends 'blogapp/base_index.html' %}
+{% block content %}
+
+{% for u in user_list %}
+<ul>
+    <li>
+        <b>Пользователь:</b>
+        {% if user.is_authenticated %}
+            <a href="{% url 'profile' u.id %} "> {{u.username}} </a></b><br>
+        {% else %}
+            {{u.username}}
+        {% endif %}
+    </li>
+    <ul>
+        {% for post in u.post_set.all %}
+            <li>
+                <a href="{% url 'post' post.id%}">{{ post.title }}</a>
+            </li>
+        {% endfor %}
+
+    </ul>
+</ul>
+    {% endfor%}
+<br>
+{% if user.is_authenticated %}
+    <button onclick="window.location.href = '{% url 'create_post' %}';">Создать пост</button>
+{% endif %}
+
+
+
+
+{% endblock %}

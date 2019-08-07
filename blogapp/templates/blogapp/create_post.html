@@ -1,0 +1,21 @@
+{% extends 'blogapp/base_index.html' %}
+{% block content %}
+
+<form  action="{% url 'create_post' %}" method="post">
+    {% csrf_token %}
+    <ul>
+        <li>
+            <label>Заголовок:</label>
+            <input type="text" name="title">
+        </li>
+        <li>
+            <label>Сообщение:</label>
+            <textarea name="text" cols="40" rows="5"></textarea>
+        </li>
+        <li>
+            <button type="submit">Отправить</button>
+        </li>
+    </ul>
+</form>
+
+{% endblock %}

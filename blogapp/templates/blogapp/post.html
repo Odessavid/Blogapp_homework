@@ -1,0 +1,48 @@
+{% extends 'blogapp/base_index.html' %}
+{% block content %}
+
+<ul>
+    <li>
+        <b>Звголовок:</b>
+        {{post.title}}
+    </li>
+    <li>
+        <b>Дата создания:</b>
+        {{post.date_time}}
+    </li>
+    <li>
+        <b>Пост:</b>
+        {{post.text}}
+    </li>
+</ul>
+
+{% if user.is_authenticated %}
+    <ul>
+        {% for com in post.comment_set.all %}
+            <li>
+                <b>{{com.user}}</b> - {{ com.date_time}}<br>
+                {{ com.text}}<br>
+                {% if post.user == user %}
+                    <a href="{% url 'delete' com.id %}">delete</a>
+                {% endif %}
+
+                {% if com.user == user %}
+                    <a href="{% url 'edit' com.id %}">edit</a>
+                {% endif %}
+            </li>
+        {% endfor%}
+    </ul>
+
+    <form  action="{% url 'post' post.id %}" method="post">
+        {% csrf_token %}
+        <label>Оставить коментарий:</label>
+        <textarea name="text" cols="40" rows="5"></textarea>
+        <button type="submit">Отправить</button>
+    </form>
+{% else %}
+    <a href="{% url 'login' %}">чтобы прочесть комментарии авторизуйся</a>
+{% endif %}
+
+
+</ul>
+{% endblock %}

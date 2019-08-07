@@ -1,0 +1,51 @@
+{% extends 'blogapp/base_index.html' %}
+{% block content %}
+
+<table border="1">
+    <tr >
+        <td width="100">
+            <!--{% for u in usr %}-->
+                <!--{% if u.id != user.id%}-->
+                    <!--{% if u.id == id %}-->
+                        <!--<p><b>{{u}}</b></p>-->
+                    <!--{% else %}-->
+                       <!--<p><a href="{% url 'message' u.id %}">{{u}}</a></p>-->
+                        <!--&lt;!&ndash;{{ u.user_r.filter.count}}&ndash;&gt;-->
+                        <!--&lt;!&ndash;{{u_list.}}&ndash;&gt;-->
+                        <!--&lt;!&ndash;{{u_list.user}} &ndash;&gt;-->
+                    <!--{% endif %}-->
+                <!--{% endif %}-->
+            <!--{% endfor %}-->
+
+
+
+            {% for u in u_list %}
+                {% if u.user.id != user.id %}
+                    {% if u.user.id == id %}
+                        <p><b>{{u.user}} {{u.count}}</b></p>
+                    {% else %}
+                       <p><a href="{% url 'message' u.user.id %}">{{u.user}} {{u.count}}</a></p>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        </td>
+        <td>
+            {% for m in msg %}
+                <p><b>{{m.sender.username}}</b>      <i>{{m.date_time}}</i></p>
+                <p>{{m.text}}</p>
+                <hr align="left" width="400" size="2" color="#555555" />
+            {% endfor %}
+            <form  action="{% url 'message' id %}" method="post">
+                {% csrf_token %}
+                <textarea name="text" cols="60" rows="5"></textarea><br>
+                <button type="submit">Отправить</button>
+            </form>
+        </td>
+
+
+    </tr>
+</table>
+
+
+
+{% endblock %}
