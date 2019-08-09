@@ -6,12 +6,11 @@
 </head>
 <body>
 <!--<link rel="stylesheet" type="text/css" href="/static/blogapp/css/style.css">-->
-
 <a href = "{% url 'index' %}">BLOG</a> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 
 
 {% if user.is_authenticated %}
-    Добро пожаловать, <a href="{% url 'profile' user.pk %}">{{ user.username }}</a>  <a href="{% url 'message' user.pk %}">лс({{count}})</a> | <a href="{% url 'logout' %}">logout</a>
+    Добро пожаловать, <a href="{% url 'profile' user.pk %}">{{ user.username }}</a>  <a href="{% url 'message' user.pk %}">лс({{count}}) ({{user.user_s.all.1.unread }})</a> | <a href="{% url 'logout' %}">logout</a>
 {% else %}
    <a href="{% url 'login' %}">login</a> | <a href="{% url 'signin' %}">signin</a>
 {% endif %}

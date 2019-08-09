@@ -59,6 +59,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'blogapp.context_processors.my_func',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -113,6 +114,10 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+# TEMPLATE_CONTEXT_PROCESSORS = (
+#     'blogapp.context_processors.my_func',
+# )
 
 
 # Static files (CSS, JavaScript, Images)

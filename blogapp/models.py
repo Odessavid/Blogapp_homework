@@ -32,6 +32,7 @@ class Comment(models.Model):
 
 
 class Message(models.Model):
+    _meg_list = []
     text = models.TextField('message')
     date_time = models.DateTimeField(verbose_name='Дата', auto_now_add=True, null=True)
     read = models.BooleanField(verbose_name='Прочитано')
@@ -41,3 +42,17 @@ class Message(models.Model):
     def __str__(self):
         return '{0} - {1} ({2})'.format(self.text[:150], self.sender.username, self.read)
 
+    def __init__(self, *args, **kwargs):
+        self.__class__._meg_list.append(self)
+        super(Message, self).__init__(*args, **kwargs)
+
+    # def __new__(self, *args, **kwargs):
+    #     self.__class__._meg_list.append(self)
+    #     super(Message, self).__new__(*args, **kwargs)
+
+
+
+    def unread(self):
+        # return len(self.__class__._meg_list)
+        return self.sender.user_r.filter(read=False).count()
+        # return Message.objects.filter(read=False).count()
